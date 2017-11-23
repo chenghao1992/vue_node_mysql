@@ -2,6 +2,7 @@
 
   <div id="home">
     <mt-header fixed title="fixed top"></mt-header>
+    <div id="loginOut" @click="loginOut">退出</div>
     <router-view></router-view>
     <mt-tabbar>
       <mt-tab-item id="tab1">
@@ -34,6 +35,11 @@
     },
     mounted(){
       console.log(222)
+    },
+    methods:{
+      loginOut(){
+        this.$router.push({path:'/login'})
+      }
     }
   }
 
@@ -41,5 +47,10 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  #loginOut{
+    position: absolute;
+    z-index: 1;
+    right: 10px;
+    line-height: 40px;
+  }
 </style>
