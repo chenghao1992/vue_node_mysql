@@ -26,6 +26,7 @@
 </template>
 
 <script>
+  import {loginOut} from '@/assets/js/api.js';
   export default {
     name: 'login',
     data () {
@@ -38,7 +39,12 @@
     },
     methods:{
       loginOut(){
-        this.$router.push({path:'/login'})
+        loginOut().then(data=>{
+          if(!data.code){
+            this.$router.push({path:'/login'})
+          }
+        })
+
       }
     }
   }

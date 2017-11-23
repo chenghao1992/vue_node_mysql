@@ -19,7 +19,23 @@ var jsonWrite = function(res, ret) {
     }
 };
 
-//查库操作(检测用户信息)
+//检测用户信息登录态
+router.use('/isLogin', (req, res) => {
+  if(req.session.user){
+    json={
+      code:0,
+      msg:'登录态存在'
+    };
+  } else{
+    json={
+      code:-1,
+      msg:'已失去登录态'
+    };
+  }
+  jsonWrite(res, json);
+});
+
+//登录，查库操作(检测用户信息)
 router.use('/searchUser', (req, res) => {
     var sql = $sql.user.check;
     var params = req.query;
@@ -36,7 +52,6 @@ router.use('/searchUser', (req, res) => {
                 msg:'操作成功'
               };
               req.session.user=params.username;
-              console.log(req.session)
               break;
             }else {
               json={
@@ -45,11 +60,25 @@ router.use('/searchUser', (req, res) => {
               }
             }
           }
+          // setTimeout(function () {
+          //   console.log('清除登录态');
+          //   req.session.user=null;
+          //   console.log(req.session)
+          //
+          // },3000)
             jsonWrite(res, json);
         }
     })
 });
-
+//注销(检测用户信息)
+router.use('/loginOut', (req, res) => {
+  req.session.user=null;
+  json={
+    code:0,
+    msg:'注销成功'
+  };
+  jsonWrite(res, json);
+});
 // 增加用户接口
 router.use('/register', (req, res) => {
     var params = req.body;
