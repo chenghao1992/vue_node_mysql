@@ -13,9 +13,10 @@ var flash = require('connect-flash');
 app.use(session({
   key: 'session_cookie_name',
   secret: 'session_cookie_secret',
-  cookie: {maxAge: 1000*5*60},//设置session有效期，来保存登录态的有效期，可能受浏览器缓存影响
+  cookie: {maxAge: 1000*60*30},//设置session有效期，来保存登录态的有效期，可能受浏览器缓存影响
   store: sessionStore,
   resave: true,
+  rolling:true,//每个请求都重新设置一个 cookie，默认为 false。用了刷新登录态
   saveUninitialized: false
 }));
 app.use(flash());
@@ -26,9 +27,11 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (req,res,next) {
-  console.log(req.session);
+  console.log(req.session.cookie.maxAge);
   if(req.session.user != null){
     console.log('已登录');
+    // req.session.cookie.maxAge=30000;//有操作时重置登录态时间
+    // console.log('ss:'+req.session.cookie.maxAge);
     next();
   } else{
     console.log('已失去登录态');

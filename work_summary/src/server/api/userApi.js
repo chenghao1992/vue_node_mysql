@@ -60,13 +60,7 @@ router.use('/searchUser', (req, res) => {
               }
             }
           }
-          // setTimeout(function () {
-          //   console.log('清除登录态');
-          //   req.session.user=null;
-          //   console.log(req.session)
-          //
-          // },3000)
-            jsonWrite(res, json);
+          jsonWrite(res, json);
         }
     })
 });

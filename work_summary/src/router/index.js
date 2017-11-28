@@ -43,7 +43,7 @@ router.afterEach((to, from) => {
     console.log(data)
     //只有code==-1的时候登录态就失效了，这是后台规定的
     if(data.code===-1){
-      if(from.path.indexOf('login')==-1){
+      if(to.path.indexOf('login')==-1&&to.path.indexOf('register')==-1){
         router.push('/login')
       }else {
         // next()
