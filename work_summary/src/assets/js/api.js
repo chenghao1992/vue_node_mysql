@@ -11,3 +11,6 @@ export const register = params => { return axios.post(`api/user/register`, qs.st
 
 //退出
 export const loginOut = params => { return axios.post(`api/user/loginOut`, qs.stringify(params)).then(res => res.data); };
+
+//测试
+export const sqlTest = params => {console.log(params); return axios.post(`api/user/test`, qs.stringify(params)).then(res => res.data); };

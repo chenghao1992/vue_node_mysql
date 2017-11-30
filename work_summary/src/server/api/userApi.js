@@ -108,5 +108,68 @@ router.use('/register', (req, res) => {
     })
 
 });
+//测试sql
+router.use('/test',(req ,res)=>{
+  var json={};
+  var params = req.body;
+  console.log(params);
+  switch (params.type){
+    case 'add':
+      var sql=$sql.test.insert;
+      pool.query(sql,[params.name],function (error,results) {
+        if (error) throw error;
+        if (results) {
+          json={
+            code:0,
+            msg:'增加成功'
+          }
+          jsonWrite(res, json);
+        }
+      })
+      break;
+    case 'delete':
+      var sql=$sql.test.delete;
+      pool.query(sql,[params.name],function (error,results) {
+        if (error) throw error;
+        if (results) {
+          json={
+            code:0,
+            msg:'删除成功'
+          }
+          jsonWrite(res, json);
+        }
+      })
+      break;
+    case 'update':
+      var sql=$sql.test.update;
+      pool.query(sql,[params.name],function (error,results) {
+        if (error) throw error;
+        if (results) {
+          json={
+            code:0,
+            msg:'更新成功'
+          }
+          jsonWrite(res, json);
+        }
+      })
+      break;
+    case 'select':
+      var sql=$sql.test.select;
+      pool.query(sql,[],function (error,results) {
+        if (error) throw error;
+        if (results) {
+          json={
+            code:0,
+            msg:'更新成功',
+            data:results
+          }
+          jsonWrite(res, json);
+        }
+      })
+      break;
+  }
+
+
+})
 
 module.exports = router;

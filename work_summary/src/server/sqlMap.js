@@ -21,6 +21,12 @@ var sqlMap = {
     comment: {
         written: 'insert into comment(userid, msg_id, comment_message, create_time) values (?,?,?,?)',
         search: 'select userid, msg_id, comment_message, create_time from comment'
+    },
+    test:{
+      insert:'insert into sqlTest (name) values(?)',
+      delete:'delete from sqlTest where name=?',
+      update:'update sqlTest set name=? ',
+      select:'select * from sqlTest'
     }
 }
 module.exports = sqlMap;

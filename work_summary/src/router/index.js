@@ -22,6 +22,11 @@ const router=new Router({
           path: '/home/summary',
           name: 'summary',
           component: resolve => require(['@/components/summary'], resolve)
+        },
+        {
+          path: '/home/test',
+          name: 'test',
+          component: resolve => require(['@/components/test'], resolve)
         }
       ]
     },

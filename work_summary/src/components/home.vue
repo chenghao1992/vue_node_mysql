@@ -19,7 +19,9 @@
         tab3
       </mt-tab-item>
       <mt-tab-item id="tab4">
-        tab4
+        <router-link to="/home/test">
+          测试
+        </router-link>
       </mt-tab-item>
     </mt-tabbar>
   </div>
